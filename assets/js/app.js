@@ -110,8 +110,8 @@
       '<path class="garc" d="' + G.arc + '" fill="none" stroke="url(#ga)" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="3 4"/></g>' +
       '<circle cx="' + G.madrid[0] + '" cy="' + G.madrid[1] + '" r="9" fill="rgba(59,130,246,.25)"/><circle cx="' + G.madrid[0] + '" cy="' + G.madrid[1] + '" r="4" fill="#F4F4F5" stroke="#3B82F6" stroke-width="2"/>' +
       '<circle cx="' + G.paris[0] + '" cy="' + G.paris[1] + '" r="9" fill="rgba(59,130,246,.25)"/><circle cx="' + G.paris[0] + '" cy="' + G.paris[1] + '" r="4" fill="#F4F4F5" stroke="#3B82F6" stroke-width="2"/>' +
-      '<text x="' + (G.madrid[0] + 8) + '" y="' + (G.madrid[1] + 14) + '" class="gl">' + g.from.toUpperCase() + '</text>' +
-      '<text x="' + (G.paris[0] - 8) + '" y="' + (G.paris[1] - 10) + '" text-anchor="end" class="gl">' + g.to.toUpperCase() + '</text></svg>';
+      '<text x="' + (G.madrid[0] + 10) + '" y="' + (G.madrid[1] + 17) + '" class="gcity">' + g.from.toUpperCase() + '</text>' +
+      '<text x="' + (G.paris[0] - 12) + '" y="' + (G.paris[1] - 9) + '" text-anchor="end" class="gcity">' + g.to.toUpperCase() + '</text></svg>';
   }
 
   /* ---------- helpers ---------- */
@@ -154,11 +154,11 @@ function idBlock() {
 
   function educationCard() {
     var e = C.highlights.education, g = e.globe;
-    return '<section class="card edu2 glow"><h2 class="dd">' + e.title + '</h2>' +
+    return '<section class="card edu2 glow"><h2 class="dd">' + e.title + '</h2>' + (e.subtitle ? '<p class="dsub">' + e.subtitle + '</p>' : '') +
       '<div class="globe">' + globeSVG(g) + '</div>' +
       '<div class="pres"><span class="fi">' + I.medal + '</span><b>' + e.prestige + '</b></div>' +
       '<div class="legs">' + e.legs.map(function (l) {
-        return '<div class="leg"><div class="lgh">' + logo(l.logo, "md") + '<b class="ln">' + l.org + '</b><span class="lr"><span class="y">' + l.y + '</span><span class="mono">' + l.tag + '</span></span></div>' + routeLine() + '<p><em>' + l.b + '</em>' + l.d + '</p></div>';
+        return '<div class="leg"><div class="lgh">' + logo(l.logo, "md") + '<div class="lnw"><b class="ln">' + l.org + '</b><span class="mono dg">' + l.deg + '</span></div><span class="lr"><span class="y">' + l.y + '</span><span class="mono">' + l.tag + '</span></span></div>' + routeLine() + '<p><em>' + l.b + '</em>' + l.d + '</p></div>';
       }).join("") + '</div>' +
       '<div class="chips" style="margin-top:14px">' + e.langs.map(function (l) { return '<span class="chip static">' + l + '</span>'; }).join("") + '</div></section>';
   }
@@ -194,7 +194,7 @@ function idBlock() {
     var c = C.certs, u = C.ui, m = C.curriculum;
     var h = '<div id="learning" class="anchor">' + eyebrow(m.eyebrow) + '</div><h2 class="t">' + m.title + '</h2><div class="stack">' +
       m.blocks.map(function (b) {
-        return '<div class="card ac" data-open="false"><button class="ach" aria-expanded="false"><span class="n">' + b.n + '</span><b>' + b.t + '</b><span class="clk">Click</span><span class="cv">' + I.chev + '</span></button>' +
+        return '<div class="card ac" data-open="false"><button class="ach" aria-expanded="false"><span class="n">' + b.n + '</span><b>' + b.t + '</b><span class="clk">' + u.click + '</span><span class="cv">' + I.chev + '</span></button>' +
           '<div class="det"><div><div class="chips pad">' + b.topics.map(function (t) { return '<span class="chip dev static">' + t + '</span>'; }).join("") + '</div></div></div></div>';
       }).join("") + '</div>' +
       '<div class="tk"><span class="mono">' + m.toolsLabel + '</span><div class="chips">' + m.tools.map(function (t) { return '<span class="chip dev static">' + techIcon(t.icon) + t.n + '</span>'; }).join("") + '</div></div>';
@@ -223,6 +223,7 @@ function idBlock() {
     return '<svg viewBox="0 0 320 98" role="img" aria-hidden="true">' + node(50, 38, a[0], a[1]) + node(160, 38, b[0], b[1]) + node(270, 38, c[0], c[1]) + arrow(88, 122, 38) + arrow(198, 232, 38) + '</svg>';
   }
   function gfx(k) {
+    var G = C.gfxLabels;
     if (k === "mawdy") {
       var hs = [30, 44, 38, 58, 50, 72, 64], ys = [70, 58, 64, 44, 50, 30, 36], bars = "", pts = [], dots = "", i;
       for (i = 0; i < 7; i++) {
@@ -234,8 +235,8 @@ function idBlock() {
       var grid = ""; for (i = 0; i < 4; i++) grid += '<path d="M12 ' + (24 + i * 27) + 'H308"/>'; for (i = 0; i < 8; i++) grid += '<path d="M' + (13 + i * 42) + ' 14V104"/>';
       return '<svg viewBox="0 0 320 112" aria-hidden="true"><g class="ggrid">' + grid + '</g><path d="M12 104H308" class="gbase"/>' + bars + '<polyline points="' + pts.join(" ") + '" pathLength="1" class="gl"/>' + dots + '</svg>';
     }
-    if (k === "brandstorm") return trio(["bottle", "SUSTAINABILITY"], ["neural", "PREDICTIVE AI"], ["trophy", "INNOVATION"]);
-    if (k === "loewe") return trio(["bag", "LUXURY RETAIL"], ["neural", "AI STRATEGY"], ["trend", "BUSINESS VALUE"]);
+    if (k === "brandstorm") return trio(["bottle", G.sus], ["neural", G.pred], ["trophy", G.inno]);
+    if (k === "loewe") return trio(["bag", G.lux], ["neural", G.ais], ["trend", G.val]);
     if (k === "thesis") {
       var d = [[24, 18], [46, 30], [70, 16], [30, 48], [58, 54], [78, 40], [22, 76], [48, 80], [72, 72]], l = "", c = "";
       d.forEach(function (q) { l += '<path d="M' + q[0] + ' ' + q[1] + 'L132 50" class="gw"/>'; c += '<circle cx="' + q[0] + '" cy="' + q[1] + '" r="3.4" class="gdot2"/>'; });
@@ -243,7 +244,7 @@ function idBlock() {
         '<circle cx="160" cy="50" r="26" class="gpulse"/><circle cx="160" cy="50" r="26" class="gc gai"/><text x="160" y="56" class="gaitx">AI</text>' +
         '<path d="M196 50H226" class="gf"/><path d="M221 45L226 50L221 55" class="ga"/>' +
         '<circle cx="262" cy="50" r="24" class="gc"/><g transform="translate(262 50) scale(1.5)" class="gi">' + GI.person + '</g>' +
-        '<text x="50" y="108" class="gt">MASS MARKET</text><text x="262" y="108" class="gt">SEGMENT OF ONE</text></svg>';
+        '<text x="50" y="108" class="gt">' + G.mass + '</text><text x="262" y="108" class="gt">' + G.one + '</text></svg>';
     }
     if (k === "lbm") {
       var hb = [22, 34, 28, 46, 40], bb = "";
@@ -259,7 +260,7 @@ function idBlock() {
     P.groups.forEach(function (g) {
       h += eyebrow(g.eyebrow) + '<div class="stack">';
       g.items.forEach(function (x) {
-        var st = x.status === "In progress" ? '<span class="pst"><i></i>' + x.status + '</span>' : '<span class="pst">' + x.status + '</span>';
+        var st = x.status === u.inProgress ? '<span class="pst"><i></i>' + x.status + '</span>' : '<span class="pst">' + x.status + '</span>';
         var aw = x.award ? '<div class="paw"><span class="pab">' + (x.award.icon === "medal" ? I.medal : '<svg viewBox="-12 -12 24 24">' + GI.trophy + '</svg>') + '<span>' + x.award.t + '</span></span>' + (x.award.s ? '<small>' + x.award.s + '</small>' : '') + '</div>' : '';
         var det = '<dl><div><dt>' + u.problem + '</dt><dd>' + x.problem + '</dd></div><div><dt>' + u.approach + '</dt><dd>' + x.approach + '</dd></div><div><dt>' + u.application + '</dt><dd>' + x.application + '</dd></div>' +
           (x.result ? '<div><dt>' + u.result + '</dt><dd>' + x.result + '</dd></div>' : '') + '</dl>';
@@ -286,8 +287,8 @@ function idBlock() {
     document.title = C.meta.title;
     document.getElementById("app").innerHTML =
       (params.has("r") ? '<div class="hello">' + C.fromCard + '</div>' : '') +
-      '<header class="top"><div class="wrap"><div class="brand"><b>' + p.name + '</b></div>' +
-      (ALL.es ? '<button class="lang" id="lang">' + u.langSwitch + '</button>' : '') +
+      '<header class="top"><div class="wrap"><div class="brand"><b><span class="bf">' + p.name + '</span><span class="bs">' + p.short + '</span></b></div>' +
+      (ALL.es ? '<button class="lang" id="lang" aria-label="' + u.langName + '">' + I.globe + '<span class="lfull">' + u.langName + '</span><span class="lsh">' + u.langSwitch + '</span></button>' : '') +
       '<div class="acts"><a class="ic p cvb" href="' + c.cv + '" download data-goatcounter-click="cv-download-top">' + I.dl + '<span>' + u.cv + '</span></a>' +
       '<a class="ic" href="' + c.linkedin + '" target="_blank" rel="noopener" aria-label="LinkedIn" data-goatcounter-click="linkedin-top">' + I.li + '</a>' +
       '<a class="ic" href="' + mailto() + '" aria-label="Email" data-goatcounter-click="email-top">' + I.mail + '</a></div></div></header>' +
@@ -325,7 +326,7 @@ function idBlock() {
         document.querySelector('.tab[data-t="' + x + '"]').setAttribute("aria-selected", x === t ? "true" : "false");
       });
       document.getElementById("heroWrap").style.display = t === "overview" ? "" : "none";
-      var cn = document.getElementById("tcnt"); if (cn) cn.textContent = "0" + (TABS.indexOf(t) + 1) + " / 03";
+      var cn = document.getElementById("tcnt"); if (cn) cn.textContent = "0" + (TABS.indexOf(t) + 1) + " / 03"; cn.classList.remove("pop"); void cn.offsetWidth; cn.classList.add("pop");
       if (push) { try { history.replaceState(null, "", "#" + t); } catch (e) {} track("tab-" + t); }
       if (scroll) { var el = document.getElementById(scroll); if (el) { setTimeout(function () { el.scrollIntoView({ behavior: "smooth", block: "start" }); }, 30); return; } }
       if (push) window.scrollTo({ top: 0, behavior: "auto" });

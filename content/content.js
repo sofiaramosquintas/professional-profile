@@ -4,7 +4,7 @@
    · Foto:  assets/img/photo.jpg      · CV:  assets/cv/Sofia-Ramos-CV.pdf
    · Logos: assets/logos/<clave>.png (o .svg). Claves: ver `logos` abajo.
      Si falta un logo, la web muestra el nombre en un recuadro.
-   · Versión en español: rellena `es` con la misma estructura que `en`.
+   · Versión en español: content/content-es.js
    ===================================================================== */
 window.CONTENT = {
   en: {
@@ -47,7 +47,7 @@ window.CONTENT = {
       completed: "Completed", inProgress: "In progress",
       problem: "Problem", approach: "Approach", application: "Business application", result: "Result",
       explore: "Explore my profile",
-      end: { overview: { b: "Explore my skills", to: "skills" }, skills: { b: "Discover my projects", to: "projects" }, projects: { b: "Back to overview", to: "overview" } }, exploreSub: "Choose a section to explore", seeProject: "See project", visit: "Visit website", langSwitch: "ES"
+      end: { overview: { b: "Explore my skills", to: "skills" }, skills: { b: "Discover my projects", to: "projects" }, projects: { b: "Back to overview", to: "overview" } }, exploreSub: "Choose a section to explore", seeProject: "See project", visit: "Visit website", langSwitch: "ES", langName: "Español", click: "Click"
     },
 
     hero: {
@@ -58,7 +58,7 @@ window.CONTENT = {
 
     // ---------- OVERVIEW ----------
     focus: {
-      eyebrow: "01 / Current focus",
+      eyebrow: "Current focus",
       logo: "isdi",
       status: "ISDI · 2026–27",
       statusSub: "In progress",
@@ -87,7 +87,7 @@ window.CONTENT = {
     },
 
     community: {
-      eyebrow: "02 / AI community",
+      eyebrow: "AI community",
       img: "assets/img/aimpacto.png",
       kind: "Active member · Volunteer",
       name: "AImpacto Madrid Rotaract",
@@ -100,14 +100,15 @@ window.CONTENT = {
     },
 
     highlights: {
-      eyebrow: "04 / Education & highlights",
+      eyebrow: "Education & highlights",
       education: {
-        title: "Double degree in Business Administration and Marketing",
+        title: "Double Degree in Business Administration & Marketing",
+        subtitle: "ESIC University (Madrid) × ESSEC Business School (Paris)",
         globe: { from: "Madrid", to: "Paris" },
-        prestige: "1 of 3 students in my cohort selected to study at ESSEC, Paris",
+        prestige: "1 of only 3 students selected for the ESSEC double-degree programme.",
         legs: [
-          { logo: "esic", tag: "Home campus · Madrid", org: "ESIC University", y: "2021–25", b: "Bachelor's in Marketing (BDM),", d: " plus a Diploma in Multimedia & Digital Tools built into the four-year programme." },
-          { logo: "essec", tag: "Selected · Paris", org: "ESSEC Business School", y: "3rd year", b: "Bachelor's in Global Business Administration (GBBA)", d: " through the joint ESIC–ESSEC programme, with an official double degree." }
+          { logo: "esic", deg: "Degree 01 · Marketing", tag: "Madrid", org: "ESIC University", y: "2021–2025", b: "Bachelor's in Marketing (BDM),", d: " plus a <em>Diploma in Multimedia & Digital Tools</em> built into the four-year programme." },
+          { logo: "essec", deg: "Degree 02 · Business Administration", tag: "Paris", org: "ESSEC Business School", y: "3rd year", b: "Bachelor's in Global Business Administration (GBBA)", d: " through the joint ESIC–ESSEC programme, with an official double degree." }
         ],
         langs: ["Spanish · native", "English · full professional", "French · limited working"]
       },
@@ -120,7 +121,7 @@ window.CONTENT = {
 
     // ---------- SKILLS ----------
     skills: {
-      eyebrow: "02 / Skills I apply",
+      eyebrow: "Skills I apply",
       applied: [
         { n: "Python", icon: "python", ev: "Predictive models in the Eco-Beauty Hub (L'Oréal Brandstorm). Going deeper in the master's and in Harvard's CS50P." },
         { n: "Machine learning", ev: "Core of my Brandstorm concept and the basis of my thesis on AI-powered hyperpersonalization." },
@@ -170,6 +171,8 @@ window.CONTENT = {
     },
 
     // ---------- PROJECTS ----------
+    gfxLabels: { sus: "SUSTAINABILITY", pred: "PREDICTIVE AI", inno: "INNOVATION", lux: "LUXURY RETAIL", ais: "AI STRATEGY", val: "BUSINESS VALUE", mass: "MASS MARKET", one: "SEGMENT OF ONE" },
+
     projects: {
       title: "Technology applied to business",
       detailsLabel: "Project details",
@@ -241,7 +244,7 @@ window.CONTENT = {
 
     // ---------- BACKGROUND ----------
     experience: {
-      eyebrow: "03 / Business experience",
+      eyebrow: "Business experience",
       main: {
         logo: "farlabo", org: "Farlabo", role: "In-house brands marketing", period: "Jan 2025 – May 2026",
         big: "1.5 years", sub: "developing business",
@@ -258,7 +261,5 @@ window.CONTENT = {
         { logo: "wow", org: "WOW Studio", role: "Founder", period: "2022–23", d: "Fashion-accessories e-commerce: website, brand, acquisition and conversion analysis." }
       ]
     }
-  },
-
-  es: null
+  }
 };
