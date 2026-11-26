@@ -52,6 +52,14 @@
     skills: '<svg viewBox="0 0 24 24" aria-hidden="true">' + LN.ml + '</svg>',
     projects: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 7.5a2 2 0 0 1 2-2h4l2 2.2h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M9 16v-3M12 16v-5M15 16v-2"/></svg>'
   };
+  var RET = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h9a6 6 0 0 1 6 6v1"/></svg>';
+  var ARR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  function endnav(t) {
+    var e = C.ui.end[t], i = TABS.indexOf(t), n = "0" + (i + 1) + " / 03";
+    return '<div class="endnav"><div class="elines" aria-hidden="true">' + TABS.map(function (x) { return '<i' + (x === t ? ' class="on"' : '') + '></i>'; }).join("") + '</div>' +
+      '<div class="ecnt"><b>' + n + '</b> — ' + C.ui.tabs[t] + '</div>' +
+      '<button class="ebtn" data-end="' + e.to + '">' + (t === "projects" ? RET : "") + '<span>' + e.b + '</span>' + (t === "projects" ? "" : ARR) + '</button></div>';
+  }
   function logo(key, cls) {
     var txt = (C.logos && C.logos[key]) || key;
     return '<span class="lt ' + (cls || "") + ' lt-' + key + '"><span class="lw">' + txt + '</span><img src="assets/logos/' + key + '.png" alt="' + txt + '" onload="this.parentNode.classList.add(\'has\')" onerror="logoFallback(this)"></span>';
@@ -284,24 +292,32 @@ function idBlock() {
       '<a class="ic" href="' + c.linkedin + '" target="_blank" rel="noopener" aria-label="LinkedIn" data-goatcounter-click="linkedin-top">' + I.li + '</a>' +
       '<a class="ic" href="' + mailto() + '" aria-label="Email" data-goatcounter-click="email-top">' + I.mail + '</a></div></div></header>' +
       '<main class="wrap">' + idBlock() + '<div id="heroWrap">' + hero() + '</div>' +
-      '<div class="tsent"></div><div class="tabsw" id="tabsw"><div class="thead"><div class="tlab"><span>' + u.explore + '</span></div><div class="tsub">' + u.exploreSub + '</div></div><nav class="tabs" role="tablist">' + TABS.map(function (t) { return '<button class="tab" role="tab" data-t="' + t + '" aria-selected="false">' + TI[t] + '<span>' + u.tabs[t] + '</span><svg class="tar" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg></button>'; }).join("") + '</nav></div>' +
-      '<div class="view" id="v-overview">' + overview() + '</div><div class="view" id="v-skills">' + skills() + '</div><div class="view" id="v-projects">' + projects() + '</div></main>';
+      '<div class="tsent"></div><div class="tabsw" id="tabsw"><div class="thead"><span class="tlab">' + u.explore + '</span><span class="tcnt" id="tcnt">01 / 03</span></div><nav class="tabs" role="tablist">' + TABS.map(function (t) { return '<button class="tab" role="tab" data-t="' + t + '" aria-selected="false">' + TI[t] + '<span>' + u.tabs[t] + '</span></button>'; }).join("") + '</nav></div>' +
+      '<div class="view" id="v-overview">' + overview() + endnav("overview") + '</div><div class="view" id="v-skills">' + skills() + endnav("skills") + '</div><div class="view" id="v-projects">' + projects() + endnav("projects") + '</div></main>';
 
     (function () {
       var sent = document.querySelector(".tsent"), w = document.getElementById("tabsw"), tk = false, cur = false, diff = 0;
       function measure() {
         w.style.marginBottom = ""; w.classList.remove("cmp"); var f = w.offsetHeight; w.classList.add("cmp"); var c = w.offsetHeight;
-        diff = Math.max(0, f - c); w.classList.toggle("cmp", cur); w.style.marginBottom = cur ? "calc(26px + " + diff + "px)" : "";
+        diff = Math.max(0, f - c); w.classList.toggle("cmp", cur); w.style.marginBottom = cur ? "calc(24px + " + diff + "px)" : "";
       }
       function upd() {
         tk = false; var mini = sent.getBoundingClientRect().top < 18;
-        if (mini !== cur) { cur = mini; w.classList.toggle("cmp", mini); w.style.marginBottom = mini ? "calc(26px + " + diff + "px)" : ""; }
+        if (mini !== cur) { cur = mini; w.classList.toggle("cmp", mini); w.style.marginBottom = mini ? "calc(24px + " + diff + "px)" : ""; }
       }
       window.addEventListener("scroll", function () { if (!tk) { tk = true; requestAnimationFrame(upd); } }, { passive: true });
       window.addEventListener("resize", function () { measure(); upd(); });
       measure(); upd();
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); upd(); });
     })();
+    function goStart(t) {
+      show(t, true);
+      requestAnimationFrame(function () {
+        var se = document.querySelector(".tsent");
+        window.scrollTo({ top: t === "overview" ? 0 : Math.max(0, se.getBoundingClientRect().top + window.pageYOffset - 10), behavior: "auto" });
+      });
+    }
+    document.querySelectorAll(".ebtn").forEach(function (b) { b.addEventListener("click", function () { track("end-" + b.getAttribute("data-end")); goStart(b.getAttribute("data-end")); }); });
     function show(t, push, scroll) {
       if (TABS.indexOf(t) < 0) t = "overview";
       TABS.forEach(function (x) {
@@ -309,6 +325,7 @@ function idBlock() {
         document.querySelector('.tab[data-t="' + x + '"]').setAttribute("aria-selected", x === t ? "true" : "false");
       });
       document.getElementById("heroWrap").style.display = t === "overview" ? "" : "none";
+      var cn = document.getElementById("tcnt"); if (cn) cn.textContent = "0" + (TABS.indexOf(t) + 1) + " / 03";
       if (push) { try { history.replaceState(null, "", "#" + t); } catch (e) {} track("tab-" + t); }
       if (scroll) { var el = document.getElementById(scroll); if (el) { setTimeout(function () { el.scrollIntoView({ behavior: "smooth", block: "start" }); }, 30); return; } }
       if (push) window.scrollTo({ top: 0, behavior: "auto" });

@@ -36,7 +36,7 @@ window.CONTENT = {
     // Logos: clave -> nombre que se muestra si no hay archivo en assets/logos/
     logos: {
       isdi: "ISDI", mapfre: "MAPFRE", mawdy: "MAWDY", loreal: "L'ORÉAL", lebonmarche: "Le Bon Marché", loewe: "LOEWE",
-      essec: "ESSEC", esic: "ESIC", farlabo: "FARLABO", okiko: "OKIKO", sarayu: "SARAYÜ", wow: "WOW",
+      essec: "ESSEC", esic: "ESIC", farlabo: "FARLABO", okiko: "OKIKO", sarayu: "SARAYÜ", southsummit: "SOUTH SUMMIT", wow: "WOW",
       aimpacto: "AImpacto", microsoft: "Microsoft", datacamp: "DataCamp", growit: "Growit", harvard: "Harvard", ironhack: "Ironhack"
     },
 
@@ -46,7 +46,8 @@ window.CONTENT = {
       applied: "Applied", ongoing: "Ongoing in the master", legend: "applied", legend2: "in progress", ongoingBadge: "Ongoing", inProgressH: "In progress", completedH: "Completed", tapHint: "Tap a skill to see where it comes from.", certified: "Certified",
       completed: "Completed", inProgress: "In progress",
       problem: "Problem", approach: "Approach", application: "Business application", result: "Result",
-      explore: "Explore my profile", exploreSub: "Choose a section to explore", seeProject: "See project", visit: "Visit website", langSwitch: "ES"
+      explore: "Explore my profile",
+      end: { overview: { b: "Explore my skills", to: "skills" }, skills: { b: "Discover my projects", to: "projects" }, projects: { b: "Back to overview", to: "overview" } }, exploreSub: "Choose a section to explore", seeProject: "See project", visit: "Visit website", langSwitch: "ES"
     },
 
     hero: {
@@ -253,6 +254,7 @@ window.CONTENT = {
       earlier: [
         { logo: "okiko", org: "Okiko Creatives", role: "Intern", period: "2024–25", d: "Campaign performance and audience analysis to improve organic reach." },
         { logo: "sarayu", org: "Sarayü Consulting · Paris", role: "Intern", period: "2023–24", d: "Business model, pricing and positioning for a luxury childrenswear brand, from scratch." },
+        { logo: "southsummit", org: "South Summit", role: "Marketing Specialist", period: "2023", d: "Digital marketing strategy within an innovation ecosystem connecting startups, investors and technology leaders." },
         { logo: "wow", org: "WOW Studio", role: "Founder", period: "2022–23", d: "Fashion-accessories e-commerce: website, brand, acquisition and conversion analysis." }
       ]
     }
